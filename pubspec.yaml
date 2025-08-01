@@ -51,7 +51,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/logos/logo-removebg.png"
+  image_path: "assets/logos/logo_1_sem_fundo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -66,8 +66,14 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/logos/logo.png
-    - assets/logos/logo-removebg.png
+    - assets/logos/logo_1.jpg
+    - assets/logos/logo_1_sem_fundo.png
+    - assets/logos/logo_2.jpg
+    - assets/logos/logo_2_sem_fundo.png
+    - assets/logos/logo_3.jpg
+    - assets/logos/logo_3_sem_fundo.png
+    - assets/logos/logo_4.jpg
+    - assets/logos/logo_4_sem_fundo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
