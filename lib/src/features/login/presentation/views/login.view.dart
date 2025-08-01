@@ -2,6 +2,7 @@ import 'package:eventix/src/features/login/presentation/bloc/events/change_visib
 import 'package:eventix/src/features/login/presentation/bloc/visibility.bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});

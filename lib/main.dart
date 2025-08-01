@@ -1,7 +1,14 @@
 import 'package:eventix/src/features/login/presentation/views/login.view.dart';
+import 'package:eventix/src/injectors/injector.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+final getIt = GetIt.instance;
+
+void main() async{
+  await dotenv.load(fileName: ".env");
+  await init();
   runApp(const EventixApp());
 }
 
