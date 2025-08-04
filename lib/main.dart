@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-final getIt = GetIt.instance;
+final sl = GetIt.instance;
 
 void main() async{
   await dotenv.load(fileName: ".env");

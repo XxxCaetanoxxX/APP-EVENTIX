@@ -1,6 +1,30 @@
+import 'package:dio/dio.dart';
 import 'package:eventix/main.dart';
-import 'package:eventix/src/features/login/presentation/bloc/visibility.bloc.dart';
+import 'package:eventix/src/features/login/data/datasources/login_data_source.dart';
+import 'package:eventix/src/features/login/data/repositories/login_repository_impl.dart';
+import 'package:eventix/src/features/login/domain/repositories/login_repository.dart';
+import 'package:eventix/src/features/login/domain/usecases/login_use_case.dart';
+import 'package:eventix/src/features/login/presentation/bloc/login.bloc.dart';
 
 void initLogin() {
-  getIt.registerFactory(() => VisibilityBloc());
+  //visibilidade senha
+  // sl.registerFactory(() => VisibilityBloc());
+
+  //bloc
+  sl.registerFactory(() => LoginBloc(loginUseCase: sl<LoginUseCase>()));
+
+  //usecase
+  sl.registerLazySingleton(
+    () => LoginUseCase(loginRepository: sl<LoginRepository>()),
+  );
+
+  //repository
+  sl.registerLazySingleton<LoginRepository>(
+    () => LoginRepositoryImpl(loginDataSource: sl<LoginDataSource>()),
+  );
+
+  //data source
+  sl.registerLazySingleton<LoginDataSource>(
+    () => LoginDataSourceImpl(sl<Dio>()),
+  );
 }

@@ -1,6 +1,6 @@
-abstract class LoginRequest{
+abstract class LoginRequestEntity{
   final String email;
   final String password;
 
-  const LoginRequest(this.email, this.password);
+  const LoginRequestEntity(this.email, this.password);
 }

@@ -2,19 +2,21 @@ import 'package:eventix/src/core/domain/usecases/usecase.dart';
 import 'package:eventix/src/features/login/domain/entities/login_request.entity.dart';
 import 'package:eventix/src/features/login/domain/repositories/login_repository.dart';
 
+//a esquerda o que recebo do backend, a direita o que envio para o backend
 class LoginUseCase implements UseCase<void, LoginUseCaseParams> {
+  LoginUseCase({required LoginRepository loginRepository})
+    : _loginRepository = loginRepository;
+
   final LoginRepository _loginRepository;
 
-  LoginUseCase(this._loginRepository);
-
   @override
-  Future<void> call({LoginUseCaseParams? params}) async{
-    await _loginRepository.login(params?.loginRequest);
+  Future<void> call({LoginUseCaseParams? params}) async {
+    await _loginRepository.login(params?.loginRequestEntity);
   }
 }
 
-class LoginUseCaseParams{
-  final LoginRequest loginRequest;
+class LoginUseCaseParams {
+  final LoginRequestEntity loginRequestEntity;
 
-  LoginUseCaseParams(this.loginRequest);
+  LoginUseCaseParams(this.loginRequestEntity);
 }
