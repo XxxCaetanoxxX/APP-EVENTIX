@@ -5,7 +5,7 @@ import 'package:eventix/src/features/login/domain/usecases/login_use_case.dart';
 import 'package:eventix/src/features/login/presentation/bloc/events/logar.event.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/error.login.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/login_initial.state.dart';
-import 'package:eventix/src/features/login/presentation/bloc/states/teste.state.dart';
+import 'package:eventix/src/features/login/presentation/bloc/states/logado.state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginBloc extends Bloc<BaseEvent, BaseState> {
@@ -19,11 +19,11 @@ class LoginBloc extends Bloc<BaseEvent, BaseState> {
 
       Future<void> _logar(LogarEvent event, Emitter<BaseState> emit) async{
         emit(LoadingState());
-        final token = await _loginUseCase.call(params: event.params);
-        if(token != null){
-          emit(TesteState());
+        final result = await _loginUseCase.call(params: event.params);
+        if(result?.token != null){
+          emit(LogadoState());
         } else {
-          emit(ErrorLoginState('Usuário ou senha inválidos'));
+          emit(ErrorLoginState(result?.error ?? 'Usuário ou senha inválidos'));
         }
       }
 }

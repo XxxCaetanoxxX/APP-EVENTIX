@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:eventix/src/config/client/eventix.client.dart';
+import 'package:eventix/src/core/classes/login_result.dart';
 import 'package:eventix/src/features/login/data/models/login_request.model.dart';
 import 'package:eventix/src/features/login/domain/entities/login_request.entity.dart';
 
 abstract class LoginDataSource {
-  Future<String?> login(LoginRequestEntity params);
+  Future<LoginResult?> login(LoginRequestEntity params);
 }
 
 class LoginDataSourceImpl implements LoginDataSource {
@@ -13,7 +14,7 @@ class LoginDataSourceImpl implements LoginDataSource {
   LoginDataSourceImpl(this.client);
 
   @override
-  Future<String?> login(LoginRequestEntity params) async {
+  Future<LoginResult?> login(LoginRequestEntity params) async {
     try {
       Response response = await client.post(
         '/users/login',
@@ -21,15 +22,15 @@ class LoginDataSourceImpl implements LoginDataSource {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        if (response.data is String) {
-          return response.data;
-        }
+        return response.data;
       }
 
-      return null;
+      return LoginResult(error: 'Erro inesperado');
+    } on DioException catch (e) {
+      final backendMessage = e.response?.data['message'];
+      return LoginResult(error: backendMessage ?? 'Erro desconhecido');
     } catch (e) {
-      print('Erro na requisição: $e');
-      return null;
+      return LoginResult(error: 'Erro interno: ${e.toString()}');
     }
   }
 }

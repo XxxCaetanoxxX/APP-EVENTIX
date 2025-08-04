@@ -7,7 +7,7 @@ import 'package:eventix/src/features/login/presentation/bloc/events/change_visib
 import 'package:eventix/src/features/login/presentation/bloc/events/logar.event.dart';
 import 'package:eventix/src/features/login/presentation/bloc/login.bloc.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/error.login.state.dart';
-import 'package:eventix/src/features/login/presentation/bloc/states/teste.state.dart';
+import 'package:eventix/src/features/login/presentation/bloc/states/logado.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/visibility.bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +45,7 @@ class _LoginViewState extends State<LoginView> {
                 );
               }
 
-              if (state is TesteState) {
+              if (state is LogadoState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Login realizado com sucesso!'),
