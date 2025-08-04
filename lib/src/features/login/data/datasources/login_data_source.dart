@@ -22,14 +22,16 @@ class LoginDataSourceImpl implements LoginDataSource {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return response.data;
+        return LoginResult(token: response.data);
       }
 
       return LoginResult(error: 'Erro inesperado');
     } on DioException catch (e) {
+      print(e);
       final backendMessage = e.response?.data['message'];
       return LoginResult(error: backendMessage ?? 'Erro desconhecido');
     } catch (e) {
+      print(e);
       return LoginResult(error: 'Erro interno: ${e.toString()}');
     }
   }
