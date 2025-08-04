@@ -6,6 +6,7 @@ import 'package:eventix/src/features/login/domain/usecases/login_use_case.dart';
 import 'package:eventix/src/features/login/presentation/bloc/events/change_visibility.event.dart';
 import 'package:eventix/src/features/login/presentation/bloc/events/logar.event.dart';
 import 'package:eventix/src/features/login/presentation/bloc/login.bloc.dart';
+import 'package:eventix/src/features/login/presentation/bloc/states/error.login.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/teste.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/visibility.bloc.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,10 @@ class _LoginViewState extends State<LoginView> {
                 return const Center(
                   child: Text('Login realizado com sucesso!'),
                 );
+              }
+
+              if (state is ErrorLoginState) {
+                return Center(child: Text(state.message));
               }
 
               return Column(

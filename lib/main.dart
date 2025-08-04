@@ -7,6 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 final sl = GetIt.instance;
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await init();
   runApp(const EventixApp());

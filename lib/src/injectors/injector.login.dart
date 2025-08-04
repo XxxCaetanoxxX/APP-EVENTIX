@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:eventix/main.dart';
+import 'package:eventix/src/config/client/eventix.client.dart';
 import 'package:eventix/src/features/login/data/datasources/login_data_source.dart';
 import 'package:eventix/src/features/login/data/repositories/login_repository_impl.dart';
 import 'package:eventix/src/features/login/domain/repositories/login_repository.dart';
@@ -25,6 +25,6 @@ void initLogin() {
 
   //data source
   sl.registerLazySingleton<LoginDataSource>(
-    () => LoginDataSourceImpl(sl<Dio>()),
+    () => LoginDataSourceImpl(sl<EventixClient>()),
   );
 }

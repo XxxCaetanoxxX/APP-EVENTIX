@@ -8,8 +8,8 @@ class LoginRepositoryImpl implements LoginRepository {
   LoginRepositoryImpl({required loginDataSource}) : _loginDataSource = loginDataSource;
 
   @override
-  Future<void> login(LoginRequestEntity? loginRequestEntity) async {
-    await _loginDataSource.login(loginRequestEntity!);
+  Future<String?> login(LoginRequestEntity? loginRequestEntity) async {
+    return await _loginDataSource.login(loginRequestEntity!);
   }
 
   @override

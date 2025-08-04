@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:eventix/src/config/client/eventix.client.dart';
 import 'package:eventix/src/features/login/data/models/login_request.model.dart';
 import 'package:eventix/src/features/login/domain/entities/login_request.entity.dart';
 
@@ -7,28 +8,28 @@ abstract class LoginDataSource {
 }
 
 class LoginDataSourceImpl implements LoginDataSource {
-  final Dio dio;
+  final EventixClient client;
 
-  LoginDataSourceImpl(this.dio);
-  
+  LoginDataSourceImpl(this.client);
 
   @override
-  Future<String?> login(LoginRequestEntity params) async{
+  Future<String?> login(LoginRequestEntity params) async {
     try {
-      final response = await dio.post(
-        'https://projectsync-evkq.onrender.com/users/login', // exemplo de rota
+      Response response = await client.post(
+        '/users/login',
         data: LoginRequestModel(params.email, params.password).toJson(),
       );
 
-      print(response);
-
-      if (response.statusCode == 200) {
-        return response.data['token']; // ou conforme a resposta da API
-      } else {
-        return null;
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Se o backend retorna apenas o token como string
+        if (response.data is String) {
+          return response.data;
+        }
       }
+
+      return null;
     } catch (e) {
-      print(e);
+      print('Erro na requisição: $e');
       return null;
     }
   }
