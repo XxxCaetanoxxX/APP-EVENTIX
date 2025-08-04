@@ -21,7 +21,6 @@ class LoginDataSourceImpl implements LoginDataSource {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // Se o backend retorna apenas o token como string
         if (response.data is String) {
           return response.data;
         }

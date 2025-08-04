@@ -34,83 +34,96 @@ class _LoginViewState extends State<LoginView> {
       child: Scaffold(
         appBar: AppBar(title: const Text('Login')),
         body: SafeArea(
-          child: BlocBuilder<LoginBloc, BaseState>(
-            builder: (context, state) {
-              if (state is LoadingState) {
-                return const Center(child: CircularProgressIndicator());
-              }
-
-              if (state is TesteState) {
-                return const Center(
-                  child: Text('Login realizado com sucesso!'),
+          child: BlocListener<LoginBloc, BaseState>(
+            listener: (context, state) {
+              if (state is ErrorLoginState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
+                    backgroundColor: Colors.red,
+                  ),
                 );
               }
 
-              if (state is ErrorLoginState) {
-                return Center(child: Text(state.message));
-              }
-
-              return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextField(
-                  onSubmitted: (value) => print(value),
-                  controller: _emailController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(color: Colors.blue, width: 2),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(color: Colors.red),
-                    ),
-                    labelText: 'Email',
-                    suffixIcon: Icon(Icons.email),
-                    alignLabelWithHint: false,
+              if (state is TesteState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Login realizado com sucesso!'),
+                    backgroundColor: Colors.green,
                   ),
-                ),
-                Container(height: 10),
-                BlocBuilder<VisibilityBloc, bool>(
-                  builder: (context, state) {
-                    return TextField(
-                      onSubmitted: (value) {
-                        print(value);
-                        print(state);
-                        final email = _emailController.text;
-                        final senha = _senhaController.text;
-                        final params = LoginUseCaseParams(
-                          LoginRequestModel(email, senha),
-                        );
-                        context.read<LoginBloc>().add(LogarEvent(params));
-                      },
-                      obscureText: state,
-                      controller: _senhaController,
-                      decoration: InputDecoration(
-                        suffixIcon: InkWell(
-                          child: state
-                              ? const Icon(Icons.visibility)
-                              : const Icon(Icons.visibility_off),
-                          onTap: () {
-                            context.read<VisibilityBloc>().add(
-                              ChangePasswordVisibilityEvent(),
-                            );
-                          },
-                        ),
-                        border: const OutlineInputBorder(
+                );
+              }
+            },
+            child: BlocBuilder<LoginBloc, BaseState>(
+              builder: (context, state) {
+                if (state is LoadingState) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextField(
+                      onSubmitted: (value) => print(value),
+                      controller: _emailController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        labelText: 'senha',
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide(color: Colors.blue, width: 2),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide(color: Colors.red),
+                        ),
+                        labelText: 'Email',
+                        suffixIcon: Icon(Icons.email),
+                        alignLabelWithHint: false,
                       ),
-                    );
-                  },
-                ),
-              ],
-            );
-            },
+                    ),
+                    Container(height: 10),
+                    BlocBuilder<VisibilityBloc, bool>(
+                      builder: (context, state) {
+                        return TextField(
+                          onSubmitted: (value) {
+                            print(value);
+                            print(state);
+                            final email = _emailController.text;
+                            final senha = _senhaController.text;
+                            final params = LoginUseCaseParams(
+                              LoginRequestModel(email, senha),
+                            );
+                            context.read<LoginBloc>().add(LogarEvent(params));
+                          },
+                          obscureText: state,
+                          controller: _senhaController,
+                          decoration: InputDecoration(
+                            suffixIcon: InkWell(
+                              child: state
+                                  ? const Icon(Icons.visibility)
+                                  : const Icon(Icons.visibility_off),
+                              onTap: () {
+                                context.read<VisibilityBloc>().add(
+                                  ChangePasswordVisibilityEvent(),
+                                );
+                              },
+                            ),
+                            border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            labelText: 'senha',
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),
