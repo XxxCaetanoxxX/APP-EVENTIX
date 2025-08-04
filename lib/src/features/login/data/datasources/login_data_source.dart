@@ -2,10 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:eventix/src/config/client/eventix.client.dart';
 import 'package:eventix/src/core/classes/login_result.dart';
 import 'package:eventix/src/features/login/data/models/login_request.model.dart';
-import 'package:eventix/src/features/login/domain/entities/login_request.entity.dart';
 
 abstract class LoginDataSource {
-  Future<LoginResult?> login(LoginRequestEntity params);
+  Future<LoginResult?> login(LoginRequestModel params);
 }
 
 class LoginDataSourceImpl implements LoginDataSource {
@@ -14,7 +13,7 @@ class LoginDataSourceImpl implements LoginDataSource {
   LoginDataSourceImpl(this.client);
 
   @override
-  Future<LoginResult?> login(LoginRequestEntity params) async {
+  Future<LoginResult?> login(LoginRequestModel params) async {
     try {
       Response response = await client.post(
         '/users/login',
