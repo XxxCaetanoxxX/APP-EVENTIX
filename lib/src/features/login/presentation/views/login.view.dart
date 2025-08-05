@@ -9,6 +9,7 @@ import 'package:eventix/src/features/login/presentation/bloc/login.bloc.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/error.login.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/logado.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/visibility.bloc.dart';
+import 'package:eventix/src/features/login/presentation/views/home.view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,6 +53,12 @@ class _LoginViewState extends State<LoginView> {
                     backgroundColor: Colors.green,
                   ),
                 );
+
+                Future.delayed(const Duration(seconds: 3), (){
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const HomeView()),
+                  );
+                });
               }
             },
             child: BlocBuilder<LoginBloc, BaseState>(

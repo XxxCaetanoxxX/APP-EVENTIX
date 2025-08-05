@@ -7,8 +7,8 @@ class EventixClient extends DioForNative {
     : super(
         BaseOptions(
           baseUrl: dotenv.env['BACKEND_URL']!,
-          connectTimeout: const Duration(seconds: 30),
-          receiveTimeout: const Duration(seconds: 30),
+          connectTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
           headers: {
             'Content-type': 'application/json',
           }
