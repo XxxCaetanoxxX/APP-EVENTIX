@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class NavigationCuit extends Cubit<int>{
-  NavigationCuit() : super(0);
+class NavigationCubit extends Cubit<int>{
+  NavigationCubit() : super(1);
+
+  void setIndex(int index)=>emit(index);
 }
