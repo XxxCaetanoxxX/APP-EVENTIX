@@ -9,7 +9,7 @@ import 'package:eventix/src/features/login/presentation/bloc/login.bloc.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/error.login.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/logado.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/visibility.bloc.dart';
-import 'package:eventix/src/features/login/presentation/views/home.view.dart';
+import 'package:eventix/home.view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,6 +44,7 @@ class _LoginViewState extends State<LoginView> {
                     backgroundColor: Colors.red,
                   ),
                 );
+                
               }
 
               if (state is LogadoState) {
@@ -54,7 +55,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 );
 
-                Future.delayed(const Duration(seconds: 3), (){
+                Future.delayed(const Duration(seconds: 2), (){
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const HomeView()),
                   );
