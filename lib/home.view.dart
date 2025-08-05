@@ -1,4 +1,4 @@
-import 'package:flutter/gestures.dart';
+import 'package:eventix/src/features/login/presentation/views/login.view.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -19,9 +19,7 @@ class _HomeViewState extends State<HomeView> {
             //remove divider
             Theme(
               data: Theme.of(context).copyWith(
-                dividerTheme: const DividerThemeData(
-                  color: Colors.transparent
-                )
+                dividerTheme: const DividerThemeData(color: Colors.transparent),
               ),
               child: DrawerHeader(
                 margin: EdgeInsets.all(15),
@@ -36,7 +34,6 @@ class _HomeViewState extends State<HomeView> {
                       offset: Offset(0, 3),
                     ),
                   ],
-              
                 ),
                 child: Text('Drawer Header'),
               ),
@@ -51,6 +48,17 @@ class _HomeViewState extends State<HomeView> {
               title: const Text('Item 2'),
               onTap: () {
                 Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Sair', style: TextStyle(color: Colors.red)),
+              leading: Icon(Icons.logout, color: Colors.red),
+              onTap: () {
+                //somente usar para telas que nao terao a bottonnavbar
+                Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const LoginView()),
+                  (route) => false,
+                );
               },
             ),
           ],

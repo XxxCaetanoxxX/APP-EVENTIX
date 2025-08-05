@@ -1,3 +1,6 @@
+import 'package:eventix/home.view.dart';
+import 'package:eventix/src/core/views/em_construcao.view.dart';
+import 'package:eventix/src/core/widgets/botton_nav_bar.widget.dart';
 import 'package:eventix/src/features/login/presentation/views/login.view.dart';
 import 'package:eventix/src/injectors/injector.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +9,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 final sl = GetIt.instance;
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await init();
@@ -19,6 +22,13 @@ class EventixApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Eventix',
+      initialRoute: '/login',
+      routes: {
+        '/login': (context) => const LoginView(),
+        '/main': (context) => const BottomNavBarWidget(),
+        '/home': (context) => const HomeView(),
+        '/construcao': (context) => const EmConstrucaoView(),
+      },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

@@ -1,4 +1,5 @@
 import 'package:eventix/main.dart';
+import 'package:eventix/src/core/widgets/botton_nav_bar.widget.dart';
 import 'package:eventix/src/core/bloc/states/base.state.dart';
 import 'package:eventix/src/core/bloc/states/loading.state.dart';
 import 'package:eventix/src/features/login/data/models/login_request.model.dart';
@@ -9,7 +10,6 @@ import 'package:eventix/src/features/login/presentation/bloc/login.bloc.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/error.login.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/logado.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/visibility.bloc.dart';
-import 'package:eventix/home.view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,7 +44,11 @@ class _LoginViewState extends State<LoginView> {
                     backgroundColor: Colors.red,
                   ),
                 );
-                
+                Future.delayed(const Duration(seconds: 2), (){
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const BottomNavBarWidget()),
+                  );
+                });
               }
 
               if (state is LogadoState) {
@@ -57,7 +61,7 @@ class _LoginViewState extends State<LoginView> {
 
                 Future.delayed(const Duration(seconds: 2), (){
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const HomeView()),
+                    MaterialPageRoute(builder: (context) => const BottomNavBarWidget()),
                   );
                 });
               }
