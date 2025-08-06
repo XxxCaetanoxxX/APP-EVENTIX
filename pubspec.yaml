@@ -52,6 +52,7 @@ dependencies:
 
   #anotacoes json
   json_annotation: ^4.9.0
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:

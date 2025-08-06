@@ -7,9 +7,6 @@ import 'package:eventix/src/features/login/domain/usecases/login_use_case.dart';
 import 'package:eventix/src/features/login/presentation/bloc/login.bloc.dart';
 
 void initLogin() {
-  //visibilidade senha
-  // sl.registerFactory(() => VisibilityBloc());
-
   //bloc
   sl.registerFactory(() => LoginBloc(loginUseCase: sl<LoginUseCase>()));
 

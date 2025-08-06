@@ -24,6 +24,8 @@ class _LoginViewState extends State<LoginView> {
   final LoginBloc _bloc = sl<LoginBloc>();
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _senhaFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +78,10 @@ class _LoginViewState extends State<LoginView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextField(
-                      onSubmitted: (value) => print(value),
+                      focusNode: _emailFocusNode,
+                      onSubmitted: (value) {
+                        FocusScope.of(context).requestFocus(_senhaFocusNode);
+                      },
                       controller: _emailController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
@@ -99,9 +104,8 @@ class _LoginViewState extends State<LoginView> {
                     BlocBuilder<VisibilityBloc, bool>(
                       builder: (context, state) {
                         return TextField(
+                          focusNode: _senhaFocusNode,
                           onSubmitted: (value) {
-                            print(value);
-                            print(state);
                             final email = _emailController.text;
                             final senha = _senhaController.text;
                             final params = LoginUseCaseParams(

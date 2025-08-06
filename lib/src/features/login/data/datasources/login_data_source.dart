@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:eventix/src/config/client/eventix.client.dart';
 import 'package:eventix/src/core/classes/login_result.dart';
 import 'package:eventix/src/features/login/data/models/login_request.model.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class LoginDataSource {
   Future<LoginResult?> login(LoginRequestModel params);
@@ -9,6 +10,7 @@ abstract class LoginDataSource {
 
 class LoginDataSourceImpl implements LoginDataSource {
   final EventixClient client;
+  final box = Hive.box('auth');
 
   LoginDataSourceImpl(this.client);
 
@@ -21,6 +23,7 @@ class LoginDataSourceImpl implements LoginDataSource {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
+        await box.put('token', response.data);
         return LoginResult(token: response.data);
       }
 
