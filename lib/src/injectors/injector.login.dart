@@ -5,6 +5,7 @@ import 'package:eventix/src/features/login/data/repositories/login_repository_im
 import 'package:eventix/src/features/login/domain/repositories/login_repository.dart';
 import 'package:eventix/src/features/login/domain/usecases/login_use_case.dart';
 import 'package:eventix/src/features/login/presentation/bloc/login.bloc.dart';
+import 'package:hive_flutter/adapters.dart';
 
 void initLogin() {
   //bloc
@@ -22,6 +23,6 @@ void initLogin() {
 
   //data source
   sl.registerLazySingleton<LoginDataSource>(
-    () => LoginDataSourceImpl(sl<EventixClient>()),
+    () => LoginDataSourceImpl(sl<EventixClient>(), sl<Box>()),
   );
 }

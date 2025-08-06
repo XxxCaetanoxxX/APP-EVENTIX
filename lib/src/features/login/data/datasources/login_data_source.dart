@@ -10,9 +10,9 @@ abstract class LoginDataSource {
 
 class LoginDataSourceImpl implements LoginDataSource {
   final EventixClient client;
-  final box = Hive.box('auth');
+  final Box box;
 
-  LoginDataSourceImpl(this.client);
+  LoginDataSourceImpl(this.client, this.box);
 
   @override
   Future<LoginResult?> login(LoginRequestModel params) async {
