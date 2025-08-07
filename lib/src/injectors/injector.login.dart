@@ -4,13 +4,14 @@ import 'package:eventix/src/features/login/data/datasources/login_data_source.da
 import 'package:eventix/src/features/login/data/repositories/login_repository_impl.dart';
 import 'package:eventix/src/features/login/domain/repositories/login_repository.dart';
 import 'package:eventix/src/features/login/domain/usecases/login_use_case.dart';
+import 'package:eventix/src/features/login/domain/usecases/logout_use_case.dart';
 import 'package:eventix/src/features/login/presentation/bloc/login.bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 
 void initLogin() {
   //bloc
-  sl.registerFactory<LoginBloc>(
-    () => LoginBloc(loginUseCase: sl<LoginUseCase>()),
+  sl.registerLazySingleton<LoginBloc>(
+    () => LoginBloc(loginUseCase: sl<LoginUseCase>(), logOutUseCase: sl<LogOutUseCase>()),
   );
 
   //usecase
@@ -18,9 +19,11 @@ void initLogin() {
     () => LoginUseCase(loginRepository: sl<LoginRepository>()),
   );
 
+  sl.registerLazySingleton<LogOutUseCase>(() => LogOutUseCase(loginRepository: sl<LoginRepository>()));
+
   //repository
   sl.registerLazySingleton<LoginRepository>(
-    () => LoginRepositoryImpl(loginDataSource: sl<LoginDataSource>()),
+    () => LoginRepositoryImpl(loginDataSource: sl<LoginDataSource>(), box: sl<Box>()),
   );
 
   //data source

@@ -2,19 +2,25 @@ import 'package:eventix/src/core/bloc/events/base.even.dart';
 import 'package:eventix/src/core/bloc/states/base.state.dart';
 import 'package:eventix/src/core/bloc/states/loading.state.dart';
 import 'package:eventix/src/features/login/domain/usecases/login_use_case.dart';
+import 'package:eventix/src/features/login/domain/usecases/logout_use_case.dart';
 import 'package:eventix/src/features/login/presentation/bloc/events/logar.event.dart';
+import 'package:eventix/src/features/login/presentation/bloc/events/logout.event.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/error.login.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/login_initial.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/logado.state.dart';
+import 'package:eventix/src/features/login/presentation/bloc/states/logout.state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginBloc extends Bloc<BaseEvent, BaseState> {
   final LoginUseCase _loginUseCase;
+  final LogOutUseCase _logOutUseCase;
 
-  LoginBloc({required LoginUseCase loginUseCase})
+  LoginBloc({required LoginUseCase loginUseCase, required LogOutUseCase logOutUseCase})
     : _loginUseCase = loginUseCase,
+      _logOutUseCase = logOutUseCase,
       super(LoginInitialState()) {
         on<LogarEvent>(_logar);
+        on<LogOutEvent>(_logout);
       }
 
       Future<void> _logar(LogarEvent event, Emitter<BaseState> emit) async{
@@ -25,5 +31,11 @@ class LoginBloc extends Bloc<BaseEvent, BaseState> {
         } else {
           emit(ErrorLoginState(result?.error ?? 'Usuário ou senha inválidos'));
         }
+      }
+
+      Future<void> _logout(LogOutEvent event, Emitter<BaseState> emit) async{
+        emit(LoadingState());
+        await _logOutUseCase.call();
+        emit(LogOutState());
       }
 }
