@@ -19,7 +19,7 @@ class LoginDataSourceImpl implements LoginDataSource {
     try {
       Response response = await _client.post(
         '/users/login',
-        data: LoginRequestModel(params.email, params.password).toJson(),
+        data: params.toJson(),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
