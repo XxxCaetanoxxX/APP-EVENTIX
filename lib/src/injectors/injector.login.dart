@@ -9,10 +9,12 @@ import 'package:hive_flutter/adapters.dart';
 
 void initLogin() {
   //bloc
-  sl.registerFactory(() => LoginBloc(loginUseCase: sl<LoginUseCase>()));
+  sl.registerFactory<LoginBloc>(
+    () => LoginBloc(loginUseCase: sl<LoginUseCase>()),
+  );
 
   //usecase
-  sl.registerLazySingleton(
+  sl.registerLazySingleton<LoginUseCase>(
     () => LoginUseCase(loginRepository: sl<LoginRepository>()),
   );
 
@@ -23,6 +25,6 @@ void initLogin() {
 
   //data source
   sl.registerLazySingleton<LoginDataSource>(
-    () => LoginDataSourceImpl(sl<EventixClient>(), sl<Box>()),
+    () => LoginDataSourceImpl(box: sl<Box>(), client: sl<EventixClient>()),
   );
 }

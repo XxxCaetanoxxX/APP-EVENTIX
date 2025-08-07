@@ -9,21 +9,21 @@ abstract class LoginDataSource {
 }
 
 class LoginDataSourceImpl implements LoginDataSource {
-  final EventixClient client;
-  final Box box;
+  final EventixClient _client;
+  final Box _box;
 
-  LoginDataSourceImpl(this.client, this.box);
+  LoginDataSourceImpl({required client, required box}): _client = client, _box = box;
 
   @override
   Future<LoginResult?> login(LoginRequestModel params) async {
     try {
-      Response response = await client.post(
+      Response response = await _client.post(
         '/users/login',
         data: LoginRequestModel(params.email, params.password).toJson(),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        await box.put('token', response.data);
+        await _box.put('token', response.data);
         return LoginResult(token: response.data);
       }
 
