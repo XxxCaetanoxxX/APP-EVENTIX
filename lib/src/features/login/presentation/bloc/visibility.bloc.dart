@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class VisibilityBloc extends Bloc<BaseEvent, bool> {
   VisibilityBloc() : super(true) {
     on<ChangePasswordVisibilityEvent>((event, emit) {
-      print('o estado mudou');
       emit(!state);
     });
   }
