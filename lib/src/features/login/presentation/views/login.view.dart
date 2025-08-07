@@ -21,7 +21,6 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginBloc _bloc = sl<LoginBloc>();
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
   final FocusNode _emailFocusNode = FocusNode();
@@ -31,7 +30,9 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<LoginBloc>(create: (_) => _bloc),
+        BlocProvider<LoginBloc>(
+          create: (_) => LoginBloc(loginUseCase: sl(), logOutUseCase: sl()),
+        ),
         BlocProvider<VisibilityBloc>(create: (_) => VisibilityBloc()),
       ],
       child: Scaffold(
@@ -46,9 +47,11 @@ class _LoginViewState extends State<LoginView> {
                     backgroundColor: Colors.red,
                   ),
                 );
-                Future.delayed(const Duration(seconds: 2), (){
+                Future.delayed(const Duration(seconds: 2), () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const BottomNavBarWidget()),
+                    MaterialPageRoute(
+                      builder: (context) => const BottomNavBarWidget(),
+                    ),
                   );
                 });
               }
@@ -61,9 +64,11 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 );
 
-                Future.delayed(const Duration(seconds: 2), (){
+                Future.delayed(const Duration(seconds: 2), () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const BottomNavBarWidget()),
+                    MaterialPageRoute(
+                      builder: (context) => const BottomNavBarWidget(),
+                    ),
                   );
                 });
               }
