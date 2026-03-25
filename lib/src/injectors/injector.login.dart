@@ -8,14 +8,9 @@ import 'package:eventix/src/features/login/presentation/bloc/login.bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 
 void initLogin() {
-  //bloc
-  sl.registerFactory<LoginBloc>(
-    () => LoginBloc(loginUseCase: sl<LoginUseCase>()),
-  );
-
-  //usecase
-  sl.registerLazySingleton<LoginUseCase>(
-    () => LoginUseCase(loginRepository: sl<LoginRepository>()),
+  //data source
+  sl.registerLazySingleton<LoginDataSource>(
+    () => LoginDataSourceImpl(box: sl<Box>(), client: sl<EventixClient>()),
   );
 
   //repository
@@ -23,8 +18,13 @@ void initLogin() {
     () => LoginRepositoryImpl(loginDataSource: sl<LoginDataSource>()),
   );
 
-  //data source
-  sl.registerLazySingleton<LoginDataSource>(
-    () => LoginDataSourceImpl(box: sl<Box>(), client: sl<EventixClient>()),
+  //usecase
+  sl.registerLazySingleton<LoginUseCase>(
+    () => LoginUseCase(loginRepository: sl<LoginRepository>()),
+  );
+
+  //bloc
+  sl.registerFactory<LoginBloc>(
+    () => LoginBloc(loginUseCase: sl<LoginUseCase>()),
   );
 }
