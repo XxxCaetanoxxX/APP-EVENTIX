@@ -1,7 +1,7 @@
-import 'package:eventix/src/features/login/domain/usecases/login_use_case.dart';
-import 'package:eventix/src/features/login/presentation/bloc/events/login.event.dart';
+import 'package:eventix/src/core/bloc/events/base.even.dart';
 
-class LogarEvent extends LoginEvent{
-  final LoginUseCaseParams params;
-  LogarEvent(this.params);
+class LogarEvent extends BaseEvent {
+  final String email;
+  final String password;
+  LogarEvent({required this.email, required this.password});
 }

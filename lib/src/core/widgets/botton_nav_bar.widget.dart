@@ -23,6 +23,59 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
       child: BlocBuilder<NavigationCubit, int>(
         builder: (context, selectedIndex) {
           return Scaffold(
+            appBar: AppBar(title: const Text('Eventix'), centerTitle: true),
+            drawer: Drawer(
+              child: ListView(
+                children: [
+                  Theme(
+                    data: Theme.of(context).copyWith(
+                      dividerTheme: const DividerThemeData(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    child: DrawerHeader(
+                      margin: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: const Text('Drawer Header'),
+                    ),
+                  ),
+                  ListTile(
+                    title: const Text('Item 1'),
+                    onTap: () => Navigator.pop(context),
+                  ),
+                  ListTile(
+                    title: const Text('Item 2'),
+                    onTap: () => Navigator.pop(context),
+                  ),
+                  ListTile(
+                    title: const Text(
+                      'Sair',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    leading: const Icon(Icons.logout, color: Colors.red),
+                    onTap: () {
+                      Navigator.of(
+                        context,
+                        rootNavigator: true,
+                      ).pushNamedAndRemoveUntil('/login', (route) => false);
+                    },
+                  ),
+                ],
+              ),
+            ),
             body: Navigator(
               key: _navigatorKey,
               initialRoute: '/home',
@@ -51,10 +104,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             ),
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: selectedIndex,
-              onTap: (index){
-                if(selectedIndex == index) return;
+              onTap: (index) {
+                if (selectedIndex == index) return;
                 context.read<NavigationCubit>().setIndex(index);
-                _navigatorKey.currentState!.pushReplacementNamed(_routes[index]);
+                _navigatorKey.currentState!.pushReplacementNamed(
+                  _routes[index],
+                );
               },
               items: const [
                 BottomNavigationBarItem(

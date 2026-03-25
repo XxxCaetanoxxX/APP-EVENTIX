@@ -5,7 +5,7 @@ class AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler)async{
     final box = Hive.box('auth');
-    final token = box.get('token');
+    final token = box.get('accessToken');
     
     if(token != null){
       options.headers['Authorization'] = 'Bearer $token';

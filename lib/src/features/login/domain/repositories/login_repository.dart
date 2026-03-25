@@ -1,8 +1,8 @@
-import 'package:eventix/src/core/classes/login_result.dart';
-import 'package:eventix/src/features/login/data/models/login_request.model.dart';
+import 'package:eventix/src/features/login/domain/entities/login_result.entity.dart';
+import 'package:eventix/src/features/login/domain/entities/login_request.entity.dart';
 
-abstract class LoginRepository{
-  Future<LoginResult?> login(LoginRequestModel? loginRequestModel);
+abstract class LoginRepository {
+  Future<LoginResult?> login(LoginRequestEntity? loginRequestEntity);
 
-  void logout();
+  Future<void> logout();
 }
