@@ -3,17 +3,22 @@ import 'package:eventix/src/core/bloc/states/base.state.dart';
 import 'package:eventix/src/core/bloc/states/loading.state.dart';
 import 'package:eventix/src/features/login/domain/entities/login_request.entity.dart';
 import 'package:eventix/src/features/login/domain/usecases/login_use_case.dart';
+import 'package:eventix/src/features/login/domain/usecases/logout_use_case.dart';
 import 'package:eventix/src/features/login/presentation/bloc/events/logar.event.dart';
+import 'package:eventix/src/features/login/presentation/bloc/events/logout.event.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/error.login.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/login_initial.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/logado.state.dart';
+import 'package:eventix/src/features/login/presentation/bloc/states/logout.state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginBloc extends Bloc<BaseEvent, BaseState> {
   final LoginUseCase _loginUseCase;
+  final LogOutUseCase _logOutUseCase;
 
-  LoginBloc({required LoginUseCase loginUseCase})
+  LoginBloc({required LoginUseCase loginUseCase, required LogOutUseCase logOutUseCase})
     : _loginUseCase = loginUseCase,
+      _logOutUseCase = logOutUseCase,
       super(LoginInitialState()) {
     on<LogarEvent>(_logar);
   }
