@@ -8,23 +8,22 @@ abstract class HomeDataSource {
 }
 
 class HomeDataSourceImpl implements HomeDataSource {
-  final Box _box;
+  final Box? _box;
   final EventixClient _client;
 
-  HomeDataSourceImpl({required box, required client})
-    : _box = box,
-      _client = client;
+  HomeDataSourceImpl({box, required client}) : _box = box, _client = client;
 
   @override
   Future<List<EventModel>> getEventos() async {
     try {
       Response response = await _client.get('/events');
-      
+
       final data = response.data as Map<String, dynamic>;
       final events = data['events'] as List<dynamic>;
-      
-      return events.map((e) => EventModel.fromJson(e as Map<String, dynamic>)).toList();
 
+      return events
+          .map((e) => EventModel.fromJson(e as Map<String, dynamic>))
+          .toList();
     } on DioException catch (e) {
       if (e.response != null) {
         final data = e.response?.data;
@@ -33,7 +32,9 @@ class HomeDataSourceImpl implements HomeDataSource {
           final message = msg is List ? msg.join(', ') : msg?.toString();
           throw Exception('Erro do Servidor: ${message ?? 'Erro inesperado'}');
         }
-        throw Exception('Erro do Servidor: ${data?.toString() ?? 'Erro desconhecido'}');
+        throw Exception(
+          'Erro do Servidor: ${data?.toString() ?? 'Erro desconhecido'}',
+        );
       } else {
         throw Exception('Erro de Conexão: ${e.message}');
       }
