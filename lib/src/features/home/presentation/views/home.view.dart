@@ -6,7 +6,10 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SafeArea(
-      child: Center(child: Text('Home')),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Text('Seu próximo evento está aqui!'),
+      ),
     );
   }
 }

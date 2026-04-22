@@ -1,6 +1,6 @@
 import 'package:eventix/src/core/bloc/navigation.cubit.dart';
 import 'package:eventix/src/core/views/em_construcao.view.dart';
-import 'package:eventix/home.view.dart';
+import 'package:eventix/src/features/home/presentation/views/home.view.dart';
 import 'package:eventix/src/core/views/perfil.view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
