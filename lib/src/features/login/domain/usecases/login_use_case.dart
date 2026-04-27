@@ -17,6 +17,7 @@ class LoginUseCase implements UseCase<LoginResult?, LoginUseCaseParams> {
 }
 
 class LoginUseCaseParams {
+  //TODO: remover entity daqui, pois esta arquiteturalmente errado
   final LoginRequestEntity loginRequestEntity;
 
   LoginUseCaseParams(this.loginRequestEntity);

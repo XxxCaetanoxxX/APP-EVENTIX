@@ -7,7 +7,7 @@ import 'package:eventix/src/features/login/domain/repositories/login_repository.
 class LoginRepositoryImpl implements LoginRepository {
   final LoginDataSource _loginDataSource;
 
-  LoginRepositoryImpl({required loginDataSource})
+  LoginRepositoryImpl({required LoginDataSource loginDataSource})
     : _loginDataSource = loginDataSource;
 
   @override

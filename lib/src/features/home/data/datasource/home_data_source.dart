@@ -1,25 +1,22 @@
 import 'package:dio/dio.dart';
 import 'package:eventix/src/config/client/eventix.client.dart';
 import 'package:eventix/src/features/home/data/models/event.model.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:logger/logger.dart';
 
 abstract class HomeDataSource {
   Future<List<EventModel>> getEventos();
 }
 
 class HomeDataSourceImpl implements HomeDataSource {
-  final Box? _box;
   final EventixClient _client;
 
-  HomeDataSourceImpl({box, required client}) : _box = box, _client = client;
+  HomeDataSourceImpl({required client}) : _client = client;
 
   @override
   Future<List<EventModel>> getEventos() async {
     try {
       Response response = await _client.get('/events');
-
-      final data = response.data as Map<String, dynamic>;
-      final events = data['events'] as List<dynamic>;
+      final events = response.data as List<dynamic>;
 
       return events
           .map((e) => EventModel.fromJson(e as Map<String, dynamic>))
