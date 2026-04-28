@@ -1,6 +1,6 @@
 import 'package:eventix/src/features/home/presentation/views/home.view.dart';
 import 'package:eventix/src/core/views/em_construcao.view.dart';
-import 'package:eventix/src/core/views/perfil.view.dart';
+import 'package:eventix/src/features/perfil/presentation/views/perfil.view.dart';
 import 'package:eventix/src/core/widgets/botton_nav_bar.widget.dart';
 import 'package:eventix/src/features/login/presentation/views/login.view.dart';
 import 'package:eventix/src/injectors/injector.dart';
