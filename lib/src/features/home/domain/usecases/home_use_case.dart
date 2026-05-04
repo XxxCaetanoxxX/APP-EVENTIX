@@ -1,5 +1,5 @@
 import 'package:eventix/src/core/domain/usecases/usecase.dart';
-import 'package:eventix/src/features/home/domain/entities/event.entity.dart';
+import 'package:eventix/src/core/domain/entities/event.entity.dart';
 import 'package:eventix/src/features/home/domain/repositories/home_repository.dart';
 
 //implementar Params

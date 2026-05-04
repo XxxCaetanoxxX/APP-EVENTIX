@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:eventix/src/config/client/eventix.client.dart';
-import 'package:eventix/src/features/home/data/models/event.model.dart';
-import 'package:logger/logger.dart';
+import 'package:eventix/src/core/data/models/event.model.dart';
 
 abstract class HomeDataSource {
   Future<List<EventModel>> getEventos();

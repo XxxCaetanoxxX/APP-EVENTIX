@@ -1,4 +1,4 @@
-import 'package:eventix/src/features/home/domain/entities/organizer.entity.dart';
+import 'package:eventix/src/core/domain/entities/organizer.entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'organizer.model.g.dart';
