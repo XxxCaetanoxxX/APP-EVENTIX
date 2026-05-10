@@ -13,7 +13,7 @@ class LoginDataSourceImpl implements LoginDataSource {
   final EventixClient _client;
   final Box _box;
 
-  LoginDataSourceImpl({required client, required box})
+  LoginDataSourceImpl({required EventixClient client, required Box box})
     : _client = client,
       _box = box;
 

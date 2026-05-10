@@ -1,8 +1,8 @@
 import 'package:eventix/src/features/login/domain/entities/login_result.entity.dart';
-import 'package:eventix/src/features/login/data/datasources/login_data_source.dart';
+import 'package:eventix/src/features/login/data/datasources/login.datasource.dart';
 import 'package:eventix/src/features/login/data/models/login_request.model.dart';
 import 'package:eventix/src/features/login/domain/entities/login_request.entity.dart';
-import 'package:eventix/src/features/login/domain/repositories/login_repository.dart';
+import 'package:eventix/src/features/login/domain/repositories/login.repository.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
   final LoginDataSource _loginDataSource;

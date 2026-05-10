@@ -3,7 +3,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'batch.model.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable(
+  fieldRename: FieldRename.snake,
+) //transforma o meu camelCase para snake_case ao enviar e receber JSON
 class BatchModel extends BatchEntity {
   // startDate e endDate são camelCase na API, mas FieldRename.snake
   // converteria para start_date/end_date. Precisamos do @JsonKey para corrigir.

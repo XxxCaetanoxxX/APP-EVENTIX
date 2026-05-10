@@ -1,6 +1,6 @@
-import 'package:eventix/src/features/home/data/datasource/home_data_source.dart';
+import 'package:eventix/src/features/home/data/datasource/home.datasource.dart';
 import 'package:eventix/src/core/domain/entities/event.entity.dart';
-import 'package:eventix/src/features/home/domain/repositories/home_repository.dart';
+import 'package:eventix/src/features/home/domain/repositories/home.repository.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
   final HomeDataSource _dataSource;

@@ -2,7 +2,7 @@ import 'package:eventix/src/core/bloc/events/base.even.dart';
 import 'package:eventix/src/core/bloc/states/base.state.dart';
 import 'package:eventix/src/core/bloc/states/loading.state.dart';
 import 'package:eventix/src/features/login/domain/entities/login_request.entity.dart';
-import 'package:eventix/src/features/login/domain/usecases/login_use_case.dart';
+import 'package:eventix/src/features/login/domain/usecases/login.usecase.dart';
 import 'package:eventix/src/features/login/presentation/bloc/events/logar.event.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/error.login.state.dart';
 import 'package:eventix/src/features/login/presentation/bloc/states/login_initial.state.dart';

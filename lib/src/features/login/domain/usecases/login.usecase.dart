@@ -1,7 +1,7 @@
 import 'package:eventix/src/features/login/domain/entities/login_result.entity.dart';
 import 'package:eventix/src/core/domain/usecases/usecase.dart';
 import 'package:eventix/src/features/login/domain/entities/login_request.entity.dart';
-import 'package:eventix/src/features/login/domain/repositories/login_repository.dart';
+import 'package:eventix/src/features/login/domain/repositories/login.repository.dart';
 
 //a esquerda o que recebo do backend, a direita o que envio para o backend
 class LoginUseCase implements UseCase<LoginResult?, LoginUseCaseParams> {

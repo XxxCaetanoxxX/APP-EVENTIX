@@ -1,9 +1,9 @@
 import 'package:eventix/main.dart';
 import 'package:eventix/src/config/client/eventix.client.dart';
-import 'package:eventix/src/features/home/data/datasource/home_data_source.dart';
-import 'package:eventix/src/features/home/data/repositories/home_repository_impl.dart';
-import 'package:eventix/src/features/home/domain/repositories/home_repository.dart';
-import 'package:eventix/src/features/home/domain/usecases/home_use_case.dart';
+import 'package:eventix/src/features/home/data/datasource/home.datasource.dart';
+import 'package:eventix/src/features/home/data/repositories/home.repository_impl.dart';
+import 'package:eventix/src/features/home/domain/repositories/home.repository.dart';
+import 'package:eventix/src/features/home/domain/usecases/home.usecase.dart';
 import 'package:eventix/src/features/home/presentation/bloc/home.bloc.dart';
 
 void initHome() {

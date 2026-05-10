@@ -1,8 +1,8 @@
 import 'package:eventix/src/core/domain/usecases/usecase.dart';
 import 'package:eventix/src/core/domain/entities/event.entity.dart';
-import 'package:eventix/src/features/home/domain/repositories/home_repository.dart';
+import 'package:eventix/src/features/home/domain/repositories/home.repository.dart';
 
-//implementar Params
+//TODO implementar Params
 class HomeUseCase implements UseCase<List<EventEntity>, HomeUseCaseParams> {
   final HomeRepository _homeRepository;
 
