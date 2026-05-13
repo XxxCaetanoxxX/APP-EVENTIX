@@ -1,8 +1,8 @@
 import 'package:eventix/src/core/bloc/events/base.even.dart';
-import 'package:eventix/src/features/home/domain/usecases/home.usecase.dart';
+import 'package:eventix/src/features/home/domain/usecases/buscar_eventos.usecase.dart';
 
 class BuscarEventosEvent extends BaseEvent {
-  final HomeUseCaseParams? params;
+  final BuscarEventosUseCaseParams? params;
 
   BuscarEventosEvent({this.params});
 }

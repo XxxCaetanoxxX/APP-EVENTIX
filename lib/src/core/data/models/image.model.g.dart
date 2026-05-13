@@ -7,7 +7,7 @@ part of 'image.model.dart';
 // **************************************************************************
 
 ImageModel _$ImageModelFromJson(Map<String, dynamic> json) => ImageModel(
-  id: (json['id'] as num).toInt(),
+  id: (json['id'] as num?)?.toInt(),
   userId: (json['userId'] as num?)?.toInt(),
   eventId: (json['eventId'] as num?)?.toInt(),
   path: json['path'] as String,

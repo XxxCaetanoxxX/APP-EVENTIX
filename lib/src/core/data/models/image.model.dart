@@ -15,7 +15,7 @@ class ImageModel extends ImageEntity {
   final int? eventId;
 
   ImageModel({
-    required super.id,
+    super.id,
     this.userId,
     this.eventId,
     required super.path,
