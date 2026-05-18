@@ -1,4 +1,4 @@
-import 'package:eventix/src/core/bloc/events/base.even.dart';
+import 'package:eventix/src/core/bloc/events/base.event.dart';
 import 'package:eventix/src/core/bloc/states/base.state.dart';
 import 'package:eventix/src/core/bloc/states/error.state.dart';
 import 'package:eventix/src/core/bloc/states/loading.state.dart';
@@ -23,7 +23,9 @@ class HomeBloc extends Bloc<BaseEvent, BaseState> {
   ) async {
     emit(LoadingState());
     try {
-      final listaEventos = await _buscarEventosUseCase.call(params: event.params);
+      final listaEventos = await _buscarEventosUseCase.call(
+        params: event.params,
+      );
       emit(HomeLoadedState(listaEventos: listaEventos));
     } catch (e) {
       emit(ErrorState(message: 'Erro inesperado: ${e.toString()}'));

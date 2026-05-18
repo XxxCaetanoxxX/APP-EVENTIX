@@ -1,4 +1,4 @@
-import 'package:eventix/src/core/bloc/events/base.even.dart';
+import 'package:eventix/src/core/bloc/events/base.event.dart';
 import 'package:eventix/src/core/bloc/states/base.state.dart';
 import 'package:eventix/src/core/bloc/states/loading.state.dart';
 import 'package:eventix/src/features/login/domain/entities/login_request.entity.dart';

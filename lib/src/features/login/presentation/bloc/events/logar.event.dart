@@ -1,4 +1,4 @@
-import 'package:eventix/src/core/bloc/events/base.even.dart';
+import 'package:eventix/src/core/bloc/events/base.event.dart';
 
 class LogarEvent extends BaseEvent {
   final String email;

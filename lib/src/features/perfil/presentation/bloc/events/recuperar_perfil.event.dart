@@ -1,3 +1,3 @@
-import 'package:eventix/src/core/bloc/events/base.even.dart';
+import 'package:eventix/src/features/perfil/presentation/bloc/events/perfil.event.dart';
 
-class BuscarPerfilEvent extends BaseEvent {}
+class BuscarPerfilEvent extends PerfilEvent {}

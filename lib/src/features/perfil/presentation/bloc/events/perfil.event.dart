@@ -1,3 +1,3 @@
 import 'package:eventix/src/core/bloc/events/base.event.dart';
 
-class ChangePasswordVisibilityEvent extends BaseEvent {}
+class PerfilEvent extends BaseEvent {}
