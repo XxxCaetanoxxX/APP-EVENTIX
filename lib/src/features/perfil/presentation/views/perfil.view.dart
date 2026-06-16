@@ -8,10 +8,12 @@ import 'package:eventix/src/features/perfil/presentation/bloc/events/atualizar_p
 import 'package:eventix/src/features/perfil/presentation/bloc/events/recuperar_perfil.event.dart';
 import 'package:eventix/src/features/perfil/presentation/bloc/perfil.bloc.dart';
 import 'package:eventix/src/features/perfil/presentation/bloc/states/perfil.loaded.state.dart';
+import 'package:eventix/src/features/perfil/presentation/widgets/alterar_senha.widget.dart';
 import 'package:eventix/src/features/perfil/presentation/widgets/custom_text_field.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:logger/logger.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class PerfilView extends StatefulWidget {
@@ -33,6 +35,8 @@ class _PerfilViewState extends State<PerfilView> {
   final FocusNode _phoneFocusNode = FocusNode();
   final _picker = ImagePicker();
   final _formKey = GlobalKey<FormState>();
+
+  final logger = Logger();
 
   final _cpfMaskFormatter = MaskTextInputFormatter(
     mask: '###.###.###-##',
@@ -239,7 +243,10 @@ class _PerfilViewState extends State<PerfilView> {
                                     if (value == null || value.isEmpty) {
                                       return 'O CPF não pode ser vazio';
                                     }
-                                    if (_cpfMaskFormatter.getUnmaskedText().length != 11) {
+                                    if (_cpfMaskFormatter
+                                            .unmaskText(value)
+                                            .length !=
+                                        11) {
                                       return 'O CPF deve ter 11 caracteres';
                                     }
                                     return null;
@@ -252,11 +259,18 @@ class _PerfilViewState extends State<PerfilView> {
                                   focusNode: _phoneFocusNode,
                                   inputFormatters: [_phoneMaskFormatter],
                                   validator: (value) {
+                                    logger.d('value: $value');
+                                    logger.d(
+                                      'masked: ${_phoneMaskFormatter.unmaskText(value ?? '')}',
+                                    );
                                     if (value == null || value.isEmpty) {
                                       return 'O celular não pode ser vazio';
                                     }
-                                    if (_phoneMaskFormatter.getUnmaskedText().length != 11) {
-                                      return 'O celular deve ter 11 caracteres';
+                                    if (_phoneMaskFormatter
+                                            .unmaskText(value)
+                                            .length !=
+                                        13) {
+                                      return 'O celular deve ter 13 caracteres';
                                     }
                                     return null;
                                   },
@@ -271,7 +285,8 @@ class _PerfilViewState extends State<PerfilView> {
                                       child: SizedBox(
                                         width: double.infinity,
                                         child: OutlinedButton.icon(
-                                          onPressed: () {},
+                                          onPressed: () =>
+                                              showAlterarSenhaDialog(context),
                                           label: const Text('Alterar senha'),
                                           icon: const Icon(Icons.key),
                                         ),
@@ -304,7 +319,10 @@ class _PerfilViewState extends State<PerfilView> {
                                                   id: perfil.id,
                                                   name: _nameController.text,
                                                   email: _emailController.text,
-                                                  phone: _phoneMaskFormatter.getUnmaskedText(),
+                                                  phone: _phoneMaskFormatter
+                                                      .unmaskText(
+                                                        _phoneController.text,
+                                                      ),
                                                 ),
                                               );
                                             }

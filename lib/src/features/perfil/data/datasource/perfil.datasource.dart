@@ -38,16 +38,16 @@ class PerfilDataSourceImpl implements PerfilDataSource {
   Future<UserEntity> updateUser(AtualizarPerfilUseCaseParams? params) async {
     try {
       Response response = await _client.patch(
-        '/users/${params!.id}',
+        '/users/me',
         data: {
-          "name": params.name,
-          "email": params.email,
-          "phone": params.phone,
+          "name": params?.name,
+          "email": params?.email,
+          "phone": params?.phone,
         },
       );
 
       logger.i(response.data);
-      
+
       final data = response.data['data'];
 
       return UserModel.fromJson(data);
